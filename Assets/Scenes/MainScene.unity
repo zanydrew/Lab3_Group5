@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 75616258978540529}
+  m_Offset: {x: 0, y: 0, z: 0}
 --- !u!1 &404036606541313920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,6 +2649,9 @@ MonoBehaviour:
   speed: 20
   countText: {fileID: 5750179523059369960}
   winText: {fileID: 2015771900527867808}
+  m_Rigidbody: {fileID: 0}
+  m_Movement: {x: 0, y: 0, z: 0}
+  m_Count: 0
 --- !u!64 &7530489343485057526
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2824,6 +2828,7 @@ GameObject:
   - component: {fileID: 73715020919677385}
   - component: {fileID: 395118519793052762}
   - component: {fileID: 7740710199679446288}
+  - component: {fileID: 7740710199679446289}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2838,7 +2843,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7740710199679446287}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
@@ -2875,6 +2880,23 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &7740710199679446289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7740710199679446287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5acc621302d34344bfab97b41df9ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  target: {fileID: 0}
+  offset: {x: 0, y: 12, z: -8}
+  followSharpness: 5
+  minZoom: 6
+  maxZoom: 18
 --- !u!4 &7962980969710646533
 Transform:
   m_ObjectHideFlags: 0

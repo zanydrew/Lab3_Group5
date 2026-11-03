@@ -1,51 +1,86 @@
-﻿using System.Collections;
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 20f;
-    public Text countText;
-    public Text winText;
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 6f;
 
-    Rigidbody m_Rigidbody;
-    Vector3 m_Movement;
-    int m_Count;
+    [Header("Lab wiring (drag your objects here)")]
+    [SerializeField] private GameObject orbPrefab;      // TODO 5: bonus orb
+    [SerializeField] private Transform cameraTransform; // TODO 3: camera follow
+
+    private Rigidbody rb;
+    private Vector3 input;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+    }
 
     void Start()
     {
-        m_Rigidbody = GetComponent<Rigidbody>();
-        m_Count = 0;
-        setCountText();
-        winText.text = "";
+        Debug.Log("[PlayerController] Ready. Collect all orbs to win.");
     }
 
-    void FixedUpdate() {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        m_Movement.Set(horizontal, 0f, vertical);
-
-        m_Rigidbody.AddForce(m_Movement * speed);
+    void Update()
+    {
+        float h = Input.GetAxis("Horizontal"); // A/D + arrows
+        float v = Input.GetAxis("Vertical");   // W/S + arrows
+        input = new Vector3(h, 0f, v).normalized;
     }
 
+    // Move through physics so walls actually block the player.
+    void FixedUpdate()
+    {
+        Vector3 vel = input * moveSpeed;
+        vel.y = rb.velocity.y;   // Unity 6: use rb.linearVelocity
+        rb.velocity = vel;
+    }
+
+    // TODO 1: log the name of any wall you bump (once per bump).
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("[OnCollisionEnter] Bumped into: " + collision.gameObject.name);
+    }
+
+    // TODO 2: collect orbs.
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PickUp"))
+        if (other.CompareTag("Orb"))
         {
-            other.gameObject.SetActive(false);
-            m_Count++;
-            setCountText();
+            Debug.Log("[OnTriggerEnter] Collected orb: " + other.name);
+
+            if (GameManager.Instance != null)
+                GameManager.Instance.Collect();
+
+            Destroy(other.gameObject);
         }
     }
 
-    void setCountText()
+    // TODO 3: camera follows the player (player position + offset).
+    void LateUpdate()
     {
-        countText.text = "Count: " + m_Count.ToString();
-        if (m_Count >= 12)
+        if (cameraTransform == null) return;
+
+        Vector3 offset = new Vector3(0f, 12f, -8f);
+        cameraTransform.position = Vector3.Lerp(
+            cameraTransform.position,
+            transform.position + offset,
+            5f * Time.deltaTime);
+    }
+
+    // TODO 5: when the Player is destroyed, spawn one bonus orb at its last position.
+    void OnDestroy()
+    {
+        if (orbPrefab != null && gameObject.scene.isLoaded)
         {
-            winText.text = "You Win!";
+            Instantiate(orbPrefab, transform.position, Quaternion.identity);
+            Debug.Log("[OnDestroy] Bonus orb spawned.");
         }
     }
 }

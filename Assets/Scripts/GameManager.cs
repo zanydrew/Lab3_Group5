@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
         // TODO 6: replace the serialized totalOrbs with a live count:
         // GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
         // totalOrbs = orbs.Length;
+           
+     GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
+     totalOrbs = orbs.Length;
     }
 
     public void Collect()
@@ -40,11 +43,36 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Collected {collected}/{totalOrbs}");
     }
 
-    void OnGUI()
-    {
-        // Immediate-mode UI: runs several times per frame, so keep it cheap.
-        GUI.Label(new Rect(12, 10, 400, 30), $"Orbs collected: {collected} / {totalOrbs}", new GUIStyle(GUI.skin.label) { fontSize = 20 });
+    // void OnGUI()
+    // {
+    //     // Immediate-mode UI: runs several times per frame, so keep it cheap.
+    //     GUI.Label(new Rect(12, 10, 400, 30), $"Orbs collected: {collected} / {totalOrbs}", new GUIStyle(GUI.skin.label) { fontSize = 20 });
 
-        // TODO 7: when collected >= totalOrbs, draw a large centered "YOU WIN!" label.
+    //     // TODO 7: when collected >= totalOrbs, draw a large centered "YOU WIN!" label.
+    // }
+    void OnGUI()
+ {
+    if (collected >= totalOrbs)
+    {
+        GUIStyle winStyle = new GUIStyle(GUI.skin.label);
+
+        winStyle.fontSize = 50;
+        winStyle.alignment = TextAnchor.MiddleCenter;
+        winStyle.normal.textColor = Color.green;
+
+        GUI.Label(
+            new Rect(0, 0, Screen.width, Screen.height),
+            "YOU WIN!",
+            winStyle
+        );
     }
+    else
+    {
+        GUI.Label(
+            new Rect(12, 10, 400, 30),
+            $"Orbs collected: {collected} / {totalOrbs}",
+            new GUIStyle(GUI.skin.label) { fontSize = 20 }
+        );
+    }
+ }
 }

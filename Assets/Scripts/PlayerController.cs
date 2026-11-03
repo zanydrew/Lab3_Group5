@@ -34,9 +34,14 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {
-        HandleMovement();
-    }
+ {
+    HandleMovement();
+
+    // if (Input.GetKeyDown(KeyCode.K))
+    // {
+    //     Destroy(gameObject);
+    // }
+ }
 
     private void HandleMovement()
     {
@@ -65,7 +70,14 @@ public class PlayerController : MonoBehaviour
  {
     Debug.Log("Hit: " + c.gameObject.name);
  }
-
+ 
+ private void OnDestroy()
+ {
+    if (orbPrefab != null)
+    {
+        Instantiate(orbPrefab, transform.position, Quaternion.identity);
+    }
+ }
     // ---------------------------------------------------------------
     // TODO 1 (OnCollisionEnter): log the name of any wall you bump.
     // TODO 2 (OnTriggerEnter): if other.CompareTag("Orb"), Destroy the orb

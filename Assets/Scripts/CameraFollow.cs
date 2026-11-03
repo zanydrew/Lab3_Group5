@@ -28,6 +28,18 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float minZoom = 6f;
     [SerializeField] private float maxZoom = 18f;
 
+
+    void Update()
+ {
+    float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+    offset.y -= scroll * 10f;
+    offset.z += scroll * 10f;
+
+    offset.y = Mathf.Clamp(offset.y, minZoom, maxZoom);
+    offset.z = -offset.y * 0.67f;
+ }
+
     void LateUpdate()
     {
         if (target == null) return;

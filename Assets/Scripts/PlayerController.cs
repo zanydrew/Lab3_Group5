@@ -12,6 +12,17 @@ using UnityEngine;
 /// YOUR LAB TASKS live in the TODO comments. Each TODO uses one function
 /// from this week's lecture. Complete them all to finish the game.
 /// </summary>
+
+/// <summary>
+/// STARTER — Player controller for the "Orb Collector" lab goal.
+/// Attach to a cube named "Player" (add a Rigidbody, freeze rotation X/Z).
+///
+/// ALREADY WORKS: WASD movement with GetKey + GetAxis, frame-rate independent
+/// via Time.deltaTime. A Debug.Log heartbeat proves Update runs every frame.
+///
+/// YOUR LAB TASKS live in the TODO comments. Each TODO uses one function
+/// from this week's lecture. Complete them all to finish the game.
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -36,7 +47,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
-      
     }
 
     private void HandleMovement()
@@ -50,6 +60,23 @@ public class PlayerController : MonoBehaviour
         transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Orb"))
+        {
+            Debug.Log("Orb Collected!");
+
+            GameManager.Instance.Collect();
+
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision c)
+ {
+    Debug.Log("Hit: " + c.gameObject.name);
+ }
+
     // ---------------------------------------------------------------
     // TODO 1 (OnCollisionEnter): log the name of any wall you bump.
     // TODO 2 (OnTriggerEnter): if other.CompareTag("Orb"), Destroy the orb
@@ -60,28 +87,4 @@ public class PlayerController : MonoBehaviour
     // TODO 5 (OnDestroy): when the Player is destroyed, Instantiate one
     //       bonus orbPrefab at your last position.
     // ---------------------------------------------------------------
-
-private void OnCollisionEnter(Collision collision){
-
-     Debug.Log("Bumped into: " + collision.gameObject.name);
-
-}
-
-
- private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
-
-    private void LateUpdate()
-    {
-        
-    }
-
-       private void OnDestroy()
-    {
-
-    }
-
 }

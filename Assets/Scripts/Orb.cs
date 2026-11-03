@@ -48,6 +48,10 @@ public class Orb : MonoBehaviour
         Debug.Log($"[Orb] Clicked → {clickColors[clickIndex]}");
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
     // NOTE: The player script collects orbs in its OnTriggerEnter. This script
     // only handles looking pretty, being clicked, and bobbing.
 }

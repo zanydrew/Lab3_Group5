@@ -1159,7 +1159,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Win Text
+  m_Text: 
 --- !u!33 &2085137952638303640
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2596,7 +2596,7 @@ GameObject:
   - component: {fileID: 2753772700597759397}
   - component: {fileID: 2015771900527867808}
   m_Layer: 5
-  m_Name: Win Text
+  m_Name: 
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

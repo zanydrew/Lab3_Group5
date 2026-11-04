@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int totalOrbs = 5;
 
     private int collected;
+    private GUIStyle winStyle;
+    private GUIStyle counterStyle;
+    private bool stylesInitialized = false;
 
     void Awake()
     {
@@ -50,16 +53,30 @@ public class GameManager : MonoBehaviour
 
     //     // TODO 7: when collected >= totalOrbs, draw a large centered "YOU WIN!" label.
     // }
+
+    void InitializeStyles()
+    {
+        if (stylesInitialized) return;
+
+        // 2. Set up the Win Style once
+        winStyle = new GUIStyle(GUI.skin.label); 
+        winStyle.normal.textColor = Color.green;
+        winStyle.fontSize = 100;
+        winStyle.alignment = TextAnchor.MiddleCenter;
+       
+
+        // 3. Set up the Counter Style once
+        counterStyle = new GUIStyle(GUI.skin.label);
+        counterStyle.fontSize = 20;
+
+        stylesInitialized = true;
+    }
     void OnGUI()
  {
-    if (collected >= totalOrbs)
+    InitializeStyles();
+
+    if (collected == totalOrbs)
     {
-        GUIStyle winStyle = new GUIStyle(GUI.skin.label);
-
-        winStyle.fontSize = 50;
-        winStyle.alignment = TextAnchor.MiddleCenter;
-        winStyle.normal.textColor = Color.green;
-
         GUI.Label(
             new Rect(0, 0, Screen.width, Screen.height),
             "YOU WIN!",
@@ -71,7 +88,7 @@ public class GameManager : MonoBehaviour
         GUI.Label(
             new Rect(12, 10, 400, 30),
             $"Orbs collected: {collected} / {totalOrbs}",
-            new GUIStyle(GUI.skin.label) { fontSize = 20 }
+            counterStyle
         );
     }
  }

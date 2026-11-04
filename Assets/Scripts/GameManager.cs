@@ -29,12 +29,21 @@ public class GameManager : MonoBehaviour
         // Simple singleton so the player can call GameManager.Instance.Collect().
         Instance = this;
 
+<<<<<<< HEAD
         // TODO 6 (done): count the orbs that exist in the scene right now.
         // Falls back to the serialized value if none are tagged "Orb".
         GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
         if (orbs.Length > 0) totalOrbs = orbs.Length;
         collected = 0;
         Debug.Log($"[GameManager] Found {totalOrbs} orbs.");
+=======
+        // TODO 6: replace the serialized totalOrbs with a live count:
+        // GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
+        // totalOrbs = orbs.Length;
+           
+     GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
+     totalOrbs = orbs.Length;
+>>>>>>> origin/mainV2
     }
 
     public void Collect()
@@ -43,11 +52,36 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Collected {collected}/{totalOrbs}");
     }
 
-    void OnGUI()
-    {
-        // Immediate-mode UI: runs several times per frame, so keep it cheap.
-        GUI.Label(new Rect(12, 10, 400, 30), $"Orbs collected: {collected} / {totalOrbs}", new GUIStyle(GUI.skin.label) { fontSize = 20 });
+    // void OnGUI()
+    // {
+    //     // Immediate-mode UI: runs several times per frame, so keep it cheap.
+    //     GUI.Label(new Rect(12, 10, 400, 30), $"Orbs collected: {collected} / {totalOrbs}", new GUIStyle(GUI.skin.label) { fontSize = 20 });
 
-        // TODO 7: when collected >= totalOrbs, draw a large centered "YOU WIN!" label.
+    //     // TODO 7: when collected >= totalOrbs, draw a large centered "YOU WIN!" label.
+    // }
+    void OnGUI()
+ {
+    if (collected >= totalOrbs)
+    {
+        GUIStyle winStyle = new GUIStyle(GUI.skin.label);
+
+        winStyle.fontSize = 50;
+        winStyle.alignment = TextAnchor.MiddleCenter;
+        winStyle.normal.textColor = Color.green;
+
+        GUI.Label(
+            new Rect(0, 0, Screen.width, Screen.height),
+            "YOU WIN!",
+            winStyle
+        );
     }
+    else
+    {
+        GUI.Label(
+            new Rect(12, 10, 400, 30),
+            $"Orbs collected: {collected} / {totalOrbs}",
+            new GUIStyle(GUI.skin.label) { fontSize = 20 }
+        );
+    }
+ }
 }

@@ -69,14 +69,18 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision c)
  {
     Debug.Log("Hit: " + c.gameObject.name);
+    
  }
  
  private void OnDestroy()
  {
-    if (orbPrefab != null)
-    {
-        Instantiate(orbPrefab, transform.position, Quaternion.identity);
-    }
+        float offsetX = Random.Range(-1f, 1f);
+        float offsetY = Random.Range(0.2f, 1f); // Keeps it slightly off the ground
+        float offsetZ = Random.Range(-1f, 1f);
+
+        Vector3 spawnPosition = transform.position + new Vector3(offsetX, offsetY, offsetZ);
+
+        Instantiate(orbPrefab, spawnPosition, Quaternion.identity);
  }
     // ---------------------------------------------------------------
     // TODO 1 (OnCollisionEnter): log the name of any wall you bump.

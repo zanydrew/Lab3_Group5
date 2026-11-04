@@ -47,17 +47,7 @@ public class CameraFollow : MonoBehaviour
     }
 
 
-    void Update()
- {
-    float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-    offset.y -= scroll * 10f;
-    offset.z += scroll * 10f;
-
-    offset.y = Mathf.Clamp(offset.y, minZoom, maxZoom);
-    offset.z = -offset.y * 0.67f;
- }
-
+ 
     void LateUpdate()
     {
         if (target == null) return;

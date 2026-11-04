@@ -29,21 +29,12 @@ public class GameManager : MonoBehaviour
         // Simple singleton so the player can call GameManager.Instance.Collect().
         Instance = this;
 
-<<<<<<< HEAD
         // TODO 6 (done): count the orbs that exist in the scene right now.
         // Falls back to the serialized value if none are tagged "Orb".
         GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
         if (orbs.Length > 0) totalOrbs = orbs.Length;
         collected = 0;
         Debug.Log($"[GameManager] Found {totalOrbs} orbs.");
-=======
-        // TODO 6: replace the serialized totalOrbs with a live count:
-        // GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
-        // totalOrbs = orbs.Length;
-           
-     GameObject[] orbs = GameObject.FindGameObjectsWithTag("Orb");
-     totalOrbs = orbs.Length;
->>>>>>> origin/mainV2
     }
 
     public void Collect()

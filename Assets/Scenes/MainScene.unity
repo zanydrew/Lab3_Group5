@@ -456,7 +456,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7740710199679446287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a03d28510f06b84db911ad1fa28658f, type: 3}
+  m_Script: {fileID: 11500000, guid: c68ee46b0793c47f2b27593637313a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &404036606541313920
@@ -3550,12 +3550,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 75616258978540529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3b3aab86913400aa03cccf5218b833, type: 3}
+  m_Script: {fileID: 11500000, guid: c35e61a63317b42baa6c621f58af610b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 6
-  orbPrefab: {fileID: 0}
-  cameraTransform: {fileID: 0}
 --- !u!4 &9176371162122419207
 Transform:
   m_ObjectHideFlags: 0

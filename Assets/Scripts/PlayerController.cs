@@ -12,17 +12,6 @@ using UnityEngine;
 /// YOUR LAB TASKS live in the TODO comments. Each TODO uses one function
 /// from this week's lecture. Complete them all to finish the game.
 /// </summary>
-
-/// <summary>
-/// STARTER — Player controller for the "Orb Collector" lab goal.
-/// Attach to a cube named "Player" (add a Rigidbody, freeze rotation X/Z).
-///
-/// ALREADY WORKS: WASD movement with GetKey + GetAxis, frame-rate independent
-/// via Time.deltaTime. A Debug.Log heartbeat proves Update runs every frame.
-///
-/// YOUR LAB TASKS live in the TODO comments. Each TODO uses one function
-/// from this week's lecture. Complete them all to finish the game.
-/// </summary>
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]

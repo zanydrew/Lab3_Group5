@@ -27,13 +27,31 @@ public class CameraFollow : MonoBehaviour
     [Header("Zoom (stretch)")]
     [SerializeField] private float minZoom = 6f;
     [SerializeField] private float maxZoom = 18f;
+    [SerializeField] private float zoomSpeed = 5f;
+
+    private float zoom;   // current distance from the target
+
+    void Awake()
+    {
+        zoom = Mathf.Clamp(offset.magnitude, minZoom, maxZoom);
+    }
+
+    // TODO 8 (done): scroll wheel changes the camera distance.
+    void Update()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0f)
+        {
+            zoom = Mathf.Clamp(zoom - scroll * zoomSpeed, minZoom, maxZoom);
+        }
+    }
 
     void LateUpdate()
     {
         if (target == null) return;
 
         // Follow AFTER the player moved — this is why we use LateUpdate.
-        Vector3 desired = target.position + offset;
+        Vector3 desired = target.position + offset.normalized * zoom;
         transform.position = Vector3.Lerp(transform.position, desired, followSharpness * Time.deltaTime);
     }
 }

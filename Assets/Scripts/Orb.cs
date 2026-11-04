@@ -1,4 +1,4 @@
-using System.Collections;
+        using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,8 +23,22 @@ public class Orb : MonoBehaviour
 
     private Vector3 basePosition;
     private Vector3 baseScale;
-    private int clickIndex;
+    private int clickIndex= -1;
     private float hideTime = -1f;
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     void Awake()
     {
@@ -48,10 +62,6 @@ public class Orb : MonoBehaviour
         Debug.Log($"[Orb] Clicked → {clickColors[clickIndex]}");
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
     // NOTE: The player script collects orbs in its OnTriggerEnter. This script
     // only handles looking pretty, being clicked, and bobbing.
 }
